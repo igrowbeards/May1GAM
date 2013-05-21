@@ -80,16 +80,11 @@ class Player extends FlxSprite {
             singlejump = true;
             doublejump = false;
             velocity.y = -maxVelocity.y / 2;
-            FlxG.log("jump 1");
         }
         else if (!doublejump && !this.isTouching(FlxObject.FLOOR)) {
-            velocity.y = -maxVelocity.y / 2;
+            velocity.y = -maxVelocity.y / 3;
             doublejump = true;
             singlejump = false;
-            FlxG.log("jump 2");
-        }
-        else {
-            FlxG.log("couldn't jump");
         }
     }
 

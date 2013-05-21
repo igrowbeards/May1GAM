@@ -46,8 +46,8 @@ class EnemyManager extends FlxGroup {
     super.update();
     if (Lib.getTimer() > lastReleased +  releaseRate) {
       lastReleased = Lib.getTimer();
-      //release1();
-      //release2();
+      release1();
+      release2();
       if (releaseRate > 300) {
         releaseRate -= 1;
       }

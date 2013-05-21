@@ -4,23 +4,19 @@ import org.flixel.FlxG;
 
 class Platform extends FlxSprite {
 
-    public var speed:Int = 10;
+    public var speed:Int = 20;
     private var platformStartX:Int;
     private var platformWidth:Int;
 
     public function new() {
         super(platformStartX, 0);
-        switch(Std.random(5)) {
+        switch(Std.random(3)) {
           case 0:
             makeGraphic(32,10,0xffff00ff);
           case 1:
             makeGraphic(64,10,0xffff00ff);
           case 2:
             makeGraphic(96,10,0xffff00ff);
-          case 3:
-            makeGraphic(138,10,0xffff00ff);
-          case 4:
-            makeGraphic(160,10,0xffff00ff);
         }
         immovable = true;
         velocity.y = speed;
@@ -30,6 +26,7 @@ class Platform extends FlxSprite {
     public function launch():Void {
       exists = true;
       //x = 64 + Std.int(Math.random() * (FlxG.width - 128));
+      y = 0;
       switch(Std.random(5)) {
         case 0:
           x = 0;
@@ -50,7 +47,7 @@ class Platform extends FlxSprite {
         x = FlxG.width - width;
       }
 
-      if (exists && y < 0 - height) {
+      if (exists && y > FlxG.height) {
         exists = false;
       }
 

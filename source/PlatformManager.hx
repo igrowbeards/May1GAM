@@ -13,9 +13,9 @@ class PlatformManager extends FlxGroup {
   public function new() {
     super();
 
-    releaseRate = 3500;
+    releaseRate = 1750;
 
-    var poolSize = 100;
+    var poolSize = 20;
     var i = 0;
     while (i < poolSize) {
       var p = new Platform();
@@ -28,6 +28,7 @@ class PlatformManager extends FlxGroup {
     var pp = cast(getFirstAvailable(), Platform);
 
     if (pp!=null) {
+      FlxG.log("launch");
       pp.launch();
     }
   }
