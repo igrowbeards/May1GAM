@@ -7,6 +7,7 @@ import org.flixel.FlxState;
 
 class PlayState extends FlxState {
   private var score:FlxText;
+  private var floor:FlxSprite;
 
   //create all the game state objects, overriding create is the best place
   override public function create():Void {
@@ -19,13 +20,22 @@ class PlayState extends FlxState {
     //add your objects to the game stage to be drawn
     add(Registry.bullets);
     add(Registry.player);
-    add(Registry.enemies);
+    add(Registry.platforms);
     add(score);
+
+    floor = new FlxSprite(0,20);
+    floor.makeGraphic(FlxG.width,10,0xffff00ff);
+    floor.velocity.y = 10;
+    floor.immovable = true;
+    add(floor);
+    add(Registry.enemies);
   }
 
   override public function update():Void {
 
     FlxG.overlap(Registry.bullets, Registry.enemies, Registry.enemies.bulletHitEnemy);
+    FlxG.collide(floor,Registry.player);
+    FlxG.collide(Registry.platforms,Registry.player);
 
     //setup the logic to change fire modes
     if (FlxG.keys.justPressed("ONE")) {
@@ -44,6 +54,7 @@ class PlayState extends FlxState {
 
     //dont forget to update the rest of the core state and everything in it
     super.update();
+    Registry.player.acceleration.x = 0;
 
   }
 

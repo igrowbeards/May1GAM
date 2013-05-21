@@ -9,6 +9,7 @@ class Registry {
     public static var player:Player;
     public static var bullets:BulletManager;
     public static var enemies:EnemyManager;
+    public static var platforms:PlatformManager;
 
     //Setup the Registry Objects to create your instances
     public static function init() {
@@ -17,6 +18,7 @@ class Registry {
 
         bullets = new BulletManager(60);
         enemies = new EnemyManager();
+        platforms = new PlatformManager();
     }
 
 }

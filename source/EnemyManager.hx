@@ -13,18 +13,20 @@ class EnemyManager extends FlxGroup {
   public function new() {
     super();
 
-    releaseRate = 500;
+    releaseRate = 1000;
 
     var poolSize = 100;
     var i = 0;
     while (i < poolSize) {
       var enemy = new Enemy();
       add(enemy);
+      var enemy2 = new Enemy2();
+      add(enemy2);
       i++;
     }
   }
 
-  public function release():Void {
+  public function release1():Void {
     var enemy = cast (getFirstAvailable(), Enemy);
 
     if (enemy!=null) {
@@ -32,11 +34,23 @@ class EnemyManager extends FlxGroup {
     }
   }
 
+  public function release2():Void {
+    var enemy2 = cast (getFirstAvailable(), Enemy2);
+
+    if (enemy2!=null) {
+      enemy2.launch();
+    }
+  }
+
   override public function update():Void {
     super.update();
     if (Lib.getTimer() > lastReleased +  releaseRate) {
       lastReleased = Lib.getTimer();
-      release();
+      //release1();
+      //release2();
+      if (releaseRate > 300) {
+        releaseRate -= 1;
+      }
     }
   }
 

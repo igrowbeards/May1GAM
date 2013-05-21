@@ -3,21 +3,21 @@ package;
 import org.flixel.FlxG;
 import org.flixel.FlxSprite;
 
-class Enemy extends FlxSprite {
+class Enemy2 extends Enemy {
 
     public function new() {
-        super(0,0);
-        makeGraphic(16,16,0xff00ffff);
+        super();
+        makeGraphic(10,10,0xffffff00);
 
         exists = false;
     }
 
-    public function launch():Void {
-        x = Std.random(Std.int(FlxG.width - width));
-        y = -16;
-        velocity.y = 60;
+    override public function launch():Void {
+        x = 64 + Std.int(Math.random() * (FlxG.width - 128));
+        y = -10;
+        velocity.y = 100;
 
-        health = 4;
+        health = 2;
         exists = true;
     }
 
