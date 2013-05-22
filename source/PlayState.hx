@@ -18,17 +18,14 @@ class PlayState extends FlxState {
   private var gameOverText:FlxText;
   private var optionsText:FlxText;
   public var gameOverOption:Int = 0;
-  public var targetKids:Int;
   public var kidsCollected:Int = 0;
-  public var totalKids:Int;
   public var children:ChildManager;
 
   //create all the game state objects, overriding create is the best place
   override public function create():Void {
     FlxG.bgColor = 0xff241600;
-    targetKids = (FlxG.level + 1) * 3;
     //initialise the game Registry
-    Registry.init();
+    Registry.init((FlxG.level + 1) * 5, (FlxG.level + 1) * 4);
 
     speedUpTimer = speedUpTime;
 
@@ -40,6 +37,7 @@ class PlayState extends FlxState {
     add(Registry.player);
     add(Registry.platforms);
     children = new ChildManager((FlxG.level + 1) * 5);
+    add(children);
     add(score);
 
     floor = new FlxSprite(50,20);
@@ -90,7 +88,7 @@ class PlayState extends FlxState {
       FlxG.overlap(Registry.player,Registry.enemies,playerHitEnemy);
       FlxG.overlap(Registry.player,children,playerHitChild);
 
-      score.text = Std.string(kidsCollected) + " out of " + Std.string(targetKids) + "kids saved";
+      score.text = Std.string(kidsCollected) + " out of " + Std.string(Registry.totalKids) + " kids saved (" + Std.string(Registry.targetKids) + " needed)";
 
       super.update();
       Registry.player.acceleration.x = 0;
@@ -129,13 +127,15 @@ class PlayState extends FlxState {
   public function levelOver(l:FlxObject,p:FlxObject) {
     gameOver = true;
     screenDimmer.exists = true;
-    if (kidsCollected > targetKids) {
+    if (kidsCollected >= Registry.targetKids) {
       gameOverText.text = "Level Clear!";
       optionsText.text = "Next Level\n\nMenu\n\nCredits";
+      FlxG.level++;
     }
     else {
       gameOverText.text = "Level Failed";
       optionsText.text = "Play Again\n\nMenu\n\nCredits";
+      FlxG.level = 0;
     }
     gameOverText.exists = true;
     optionsText.exists = true;
