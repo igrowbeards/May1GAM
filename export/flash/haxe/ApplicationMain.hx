@@ -102,6 +102,21 @@ class ApplicationMain {
             return Assets.getSound ("Beep");
          
 		
+		if (inName=="assets/candy-32.png")
+			 
+            return Assets.getBitmapData ("assets/candy-32.png");
+         
+		
+		if (inName=="assets/candy-48.png")
+			 
+            return Assets.getBitmapData ("assets/candy-48.png");
+         
+		
+		if (inName=="assets/candy-64.png")
+			 
+            return Assets.getBitmapData ("assets/candy-64.png");
+         
+		
 		if (inName=="assets/data/autotiles.png")
 			 
             return Assets.getBitmapData ("assets/data/autotiles.png");
@@ -282,6 +297,11 @@ class ApplicationMain {
 			 return Assets.getText ("assets/HaxeFlixel.svg");
          
 		
+		if (inName=="assets/player.png")
+			 
+            return Assets.getBitmapData ("assets/player.png");
+         
+		
 		
 		return null;
 		
@@ -302,6 +322,9 @@ class ApplicationMain {
 }
 
 class NME_assets_data_beep_mp3 extends nme.media.Sound { }
+class NME_assets_candy_32_png extends nme.display.BitmapData { public function new () { super (0, 0); } }
+class NME_assets_candy_48_png extends nme.display.BitmapData { public function new () { super (0, 0); } }
+class NME_assets_candy_64_png extends nme.display.BitmapData { public function new () { super (0, 0); } }
 class NME_assets_data_autotiles_png extends nme.display.BitmapData { public function new () { super (0, 0); } }
 class NME_assets_data_autotiles_alt_png extends nme.display.BitmapData { public function new () { super (0, 0); } }
 class NME_assets_data_base_png extends nme.display.BitmapData { public function new () { super (0, 0); } }
@@ -338,6 +361,7 @@ class NME_assets_data_vcr_step_png extends nme.display.BitmapData { public funct
 class NME_assets_data_vcr_stop_png extends nme.display.BitmapData { public function new () { super (0, 0); } }
 class NME_assets_data_vis_bounds_png extends nme.display.BitmapData { public function new () { super (0, 0); } }
 class NME_assets_haxeflixel_svg extends nme.utils.ByteArray { }
+class NME_assets_player_png extends nme.display.BitmapData { public function new () { super (0, 0); } }
 
 
 #else

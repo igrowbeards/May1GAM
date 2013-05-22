@@ -10,6 +10,7 @@ class Registry {
     public static var bullets:BulletManager;
     public static var enemies:EnemyManager;
     public static var platforms:PlatformManager;
+    public static var gameSpeed:Float = 1;
 
     //Setup the Registry Objects to create your instances
     public static function init() {

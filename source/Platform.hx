@@ -12,11 +12,14 @@ class Platform extends FlxSprite {
         super(platformStartX, 0);
         switch(Std.random(3)) {
           case 0:
-            makeGraphic(32,10,0xffff00ff);
+            //makeGraphic(64,10,0xffff00ff);
+            loadGraphic("assets/candy-64.png");
           case 1:
-            makeGraphic(64,10,0xffff00ff);
+            //makeGraphic(32,10,0xffff00ff);
+            loadGraphic("assets/candy-32.png");
           case 2:
-            makeGraphic(96,10,0xffff00ff);
+            //makeGraphic(48,10,0xffff00ff);
+            loadGraphic("assets/candy-48.png");
         }
         immovable = true;
         velocity.y = speed;
@@ -27,7 +30,7 @@ class Platform extends FlxSprite {
       exists = true;
       //x = 64 + Std.int(Math.random() * (FlxG.width - 128));
       y = 0;
-      switch(Std.random(5)) {
+      switch(Std.random(6)) {
         case 0:
           x = 0;
         case 1:
@@ -38,17 +41,20 @@ class Platform extends FlxSprite {
           x = 160;
         case 4:
           x = 96;
+        case 5:
+          x = FlxG.width - width;
       }
     }
 
     override public function update():Void {
+      velocity.y = speed * Registry.gameSpeed;
       super.update();
       if (x > FlxG.width - width) {
         x = FlxG.width - width;
       }
 
       if (exists && y > FlxG.height) {
-        exists = false;
+        launch();
       }
 
     }

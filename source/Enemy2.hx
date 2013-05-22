@@ -15,7 +15,7 @@ class Enemy2 extends Enemy {
     override public function launch():Void {
         x = 64 + Std.int(Math.random() * (FlxG.width - 128));
         y = -10;
-        velocity.y = 100;
+        velocity.y = 140;
 
         health = 2;
         exists = true;

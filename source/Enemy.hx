@@ -15,7 +15,7 @@ class Enemy extends FlxSprite {
     public function launch():Void {
         x = Std.random(Std.int(FlxG.width - width));
         y = -16;
-        velocity.y = 60;
+        velocity.y = 100;
 
         health = 4;
         exists = true;

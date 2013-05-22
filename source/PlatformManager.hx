@@ -7,15 +7,19 @@ import org.flixel.FlxGroup;
 
 class PlatformManager extends FlxGroup {
 
-  private var lastReleased:Int;
-  private var releaseRate:Int;
+  // 1
+  //private var releaseRate:Float = 1.25;
+  // 2
+  //private var releaseRate:Float = 1.1;
+  // 3
+  private var releaseRate:Float = 1.8;
+  private var releaseTimer:Float;
 
   public function new() {
     super();
+    releaseTimer = releaseRate;
 
-    releaseRate = 1750;
-
-    var poolSize = 20;
+    var poolSize = 11;
     var i = 0;
     while (i < poolSize) {
       var p = new Platform();
@@ -28,16 +32,18 @@ class PlatformManager extends FlxGroup {
     var pp = cast(getFirstAvailable(), Platform);
 
     if (pp!=null) {
-      FlxG.log("launch");
       pp.launch();
     }
   }
 
   override public function update():Void {
     super.update();
-    if (Lib.getTimer() > lastReleased +  releaseRate) {
-      lastReleased = Lib.getTimer();
+    if (releaseTimer <= 0) {
       release();
+      releaseTimer = releaseRate;
+    }
+    else {
+      releaseTimer -= FlxG.elapsed;
     }
   }
 }
