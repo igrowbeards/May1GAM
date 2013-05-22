@@ -121,6 +121,8 @@ class Assets {
 			resourceTypes.set ("assets/data/vis/bounds.png", "image");
 			resourceClasses.set ("assets/HaxeFlixel.svg", NME_assets_haxeflixel_svg);
 			resourceTypes.set ("assets/HaxeFlixel.svg", "text");
+			resourceClasses.set ("assets/indicator.png", NME_assets_indicator_png);
+			resourceTypes.set ("assets/indicator.png", "image");
 			resourceClasses.set ("assets/player.png", NME_assets_player_png);
 			resourceTypes.set ("assets/player.png", "image");
 			
