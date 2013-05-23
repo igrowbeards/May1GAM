@@ -25,7 +25,7 @@ class PlayState extends FlxState {
   override public function create():Void {
     FlxG.bgColor = 0xff241600;
     //initialise the game Registry
-    Registry.init((FlxG.level + 1) * 5, (FlxG.level + 1) * 4);
+    Registry.init((FlxG.level + 1) * 5, ((FlxG.level + 1) * 3) - 1);
 
     speedUpTimer = speedUpTime;
 
@@ -93,7 +93,7 @@ class PlayState extends FlxState {
       super.update();
       Registry.player.acceleration.x = 0;
 
-      if (Registry.gameSpeed < 3.25) {
+      if (Registry.gameSpeed < speedUpTime) {
         if (speedUpTimer >= 0) {
           speedUpTimer -= FlxG.elapsed;
         }
@@ -134,8 +134,7 @@ class PlayState extends FlxState {
     }
     else {
       gameOverText.text = "Level Failed";
-      optionsText.text = "Play Again\n\nMenu\n\nCredits";
-      FlxG.level = 0;
+      optionsText.text = "Retry\n\nMenu\n\nCredits";
     }
     gameOverText.exists = true;
     optionsText.exists = true;
