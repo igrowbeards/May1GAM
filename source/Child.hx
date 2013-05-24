@@ -4,7 +4,7 @@ import org.flixel.FlxG;
 
 class Child extends FlxSprite {
 
-    public var speed:Int = 80;
+    public var speed:Int = 60;
     private var platformStartX:Int;
     private var platformWidth:Int;
 
@@ -12,7 +12,7 @@ class Child extends FlxSprite {
         super(0, 0);
         switch(Std.random(0)) {
           case 0:
-            makeGraphic(32,32,0xffffffff);
+            makeGraphic(16,20,0xffffffff);
           case 1:
             //makeGraphic(32,10,0xffff00ff);
           case 2:
@@ -24,7 +24,7 @@ class Child extends FlxSprite {
 
     public function launch():Void {
       exists = true;
-      y = 0;
+      y = -height -10;
       x = Std.random(Std.int(FlxG.width - width));
     }
 

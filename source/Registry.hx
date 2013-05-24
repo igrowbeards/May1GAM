@@ -11,15 +11,11 @@ class Registry {
     public static var enemies:EnemyManager;
     public static var platforms:PlatformManager;
     public static var gameSpeed:Float = 1;
-    public static var totalKids:Int;
-    public static var kidsDropped:Int = 0;
-    public static var targetKids:Int;
+    public static var kidsSaved:Int;
+    public static var kidsKilled:Int;
 
     //Setup the Registry Objects to create your instances
-    public static function init(totalk:Int,targetK:Int) {
-        totalKids = totalk;
-        targetKids = targetK;
-        kidsDropped = 0;
+    public static function init() {
         player = new Player();
         bullets = new BulletManager(60);
         enemies = new EnemyManager();

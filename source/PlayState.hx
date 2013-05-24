@@ -5,40 +5,44 @@ import org.flixel.FlxG;
 import org.flixel.FlxText;
 import org.flixel.FlxState;
 import org.flixel.FlxObject;
+import org.flixel.addons.FlxBackdrop;
 
 class PlayState extends FlxState {
-  private var score:FlxText;
   private var floor:FlxSprite;
   private var lava:FlxSprite;
   private var speedUpTimer:Float;
-  private var speedUpTime:Float = 5;
+  private var speedUpTime:Float = 8;
   public var gameOver:Bool;
   public var screenDimmer:FlxSprite;
   private var optionsIndicator:FlxSprite;
+  private var scoreText:FlxText;
+  private var multiplier:Int = 1;
+  private var streak:Int;
+  private var multiplierText:FlxText;
   private var gameOverText:FlxText;
+  private var gameOverStats:FlxText;
   private var optionsText:FlxText;
   public var gameOverOption:Int = 0;
   public var kidsCollected:Int = 0;
+  public var kidsKilled:Int = 0;
   public var children:ChildManager;
+  public var scanlines:FlxBackdrop;
+  public var vignette:FlxBackdrop;
 
   //create all the game state objects, overriding create is the best place
   override public function create():Void {
     FlxG.bgColor = 0xff241600;
     //initialise the game Registry
-    Registry.init((FlxG.level + 1) * 5, ((FlxG.level + 1) * 3) - 1);
+    Registry.init();
 
     speedUpTimer = speedUpTime;
-
-    //create your text
-    score = new FlxText(0, 0, 360, "0");
 
     //add your objects to the game stage to be drawn
     add(Registry.bullets);
     add(Registry.player);
     add(Registry.platforms);
-    children = new ChildManager((FlxG.level + 1) * 5);
+    children = new ChildManager(10);
     add(children);
-    add(score);
 
     floor = new FlxSprite(50,20);
     floor.makeGraphic(FlxG.width -100,10,0xffff00ff);
@@ -57,13 +61,28 @@ class PlayState extends FlxState {
     screenDimmer.exists = false;
     add(screenDimmer);
 
+    scoreText = new FlxText(10,10,FlxG.width - 20,"0");
+    scoreText.size = 14;
+    add(scoreText);
+
+    multiplierText = new FlxText(10,10,FlxG.width - 20,"");
+    multiplierText.size = 14;
+    multiplierText.alignment = 'right';
+    add(multiplierText);
+
     gameOverText = new FlxText(0, 60, FlxG.width, "Level Failed");
     gameOverText.alignment = 'center';
     gameOverText.size = 40;
     gameOverText.exists = false;
     add(gameOverText);
 
-    optionsText = new FlxText(0,140,FlxG.width, "");
+    gameOverStats = new FlxText(10, 150, FlxG.width - 20, "");
+    gameOverStats.alignment = 'center';
+    gameOverStats.size = 14;
+    gameOverStats.exists = false;
+    add(gameOverStats);
+
+    optionsText = new FlxText(0,290,FlxG.width, "");
     optionsText.alignment = 'center';
     optionsText.size = 16;
     optionsText.exists = false;
@@ -74,6 +93,13 @@ class PlayState extends FlxState {
     optionsIndicator.loadGraphic("assets/indicator.png");
     add(optionsIndicator);
     optionsIndicator.exists = false;
+
+    scanlines = new FlxBackdrop("assets/scanlines2.png", 0, 0, true, true);
+    add(scanlines);
+
+    vignette = new FlxBackdrop("assets/vignette.png", 0, 0, false, false);
+    add(vignette);
+
   }
 
   override public function update():Void {
@@ -83,12 +109,12 @@ class PlayState extends FlxState {
       FlxG.collide(children,Registry.platforms);
       FlxG.collide(children,floor);
       FlxG.collide(lava,Registry.player,levelOver);
+      FlxG.collide(children,lava, childHitLava);
       FlxG.overlap(Registry.platforms,Registry.enemies,enemyHitLevel);
       FlxG.overlap(floor,Registry.enemies,enemyHitLevel);
       FlxG.overlap(Registry.player,Registry.enemies,playerHitEnemy);
       FlxG.overlap(Registry.player,children,playerHitChild);
 
-      score.text = Std.string(kidsCollected) + " out of " + Std.string(Registry.totalKids) + " kids saved (" + Std.string(Registry.targetKids) + " needed)";
 
       super.update();
       Registry.player.acceleration.x = 0;
@@ -105,7 +131,6 @@ class PlayState extends FlxState {
       }
 
       floor.velocity.y = 20 * Registry.gameSpeed;
-      FlxG.score += Std.int(FlxG.elapsed);
     }
     else if (gameOver) {
 
@@ -122,22 +147,45 @@ class PlayState extends FlxState {
         }
       }
     }
+
+    // calculate multiplier
+    if (streak >= 15) {
+      multiplier = 5;
+    }
+    else if (streak >= 10) {
+      multiplier = 4;
+    }
+    else if (streak >= 7) {
+      multiplier = 3;
+    }
+    else if (streak >= 3) {
+      multiplier = 2;
+    }
+    else {
+      multiplier = 1;
+    }
+
+    // update score text
+    scoreText.text = Std.string(FlxG.score);
+
+    if (multiplier > 1) {
+      multiplierText.text = Std.string("x" + multiplier);
+    }
+    else {
+      multiplierText.text = Std.string("");
+    }
+
   }
 
   public function levelOver(l:FlxObject,p:FlxObject) {
     gameOver = true;
     screenDimmer.exists = true;
-    if (kidsCollected >= Registry.targetKids) {
-      gameOverText.text = "Level Clear!";
-      optionsText.text = "Next Level\n\nMenu\n\nCredits";
-      FlxG.level++;
-    }
-    else {
-      gameOverText.text = "Level Failed";
-      optionsText.text = "Retry\n\nMenu\n\nCredits";
-    }
+    gameOverText.text = "GAME OVER";
+    gameOverStats.text = "Score: " + FlxG.score + "\n\nYou rescued " + Std.string(Registry.kidsSaved) + " children. \n\nYou let " + Std.string(Registry.kidsKilled) + " children to plummet to their deaths";
+    optionsText.text = "Try Again\n\nMenu\n\nCredits";
     gameOverText.exists = true;
     optionsText.exists = true;
+    gameOverStats.exists = true;
     optionsIndicator.exists = true;
   }
 
@@ -146,6 +194,8 @@ class PlayState extends FlxState {
   }
 
   public function resetLevel():Void {
+    Registry.kidsKilled = 0;
+    Registry.kidsSaved = 0;
     Registry.gameSpeed = 1;
     FlxG.resetState();
   }
@@ -162,9 +212,16 @@ class PlayState extends FlxState {
 
   public function playerHitChild(p:FlxObject,c:FlxObject) {
     c.kill();
-    kidsCollected++;
+    Registry.kidsSaved += 1;
     var playerRef = cast(p, Player);
-    FlxG.score += 10000;
+    FlxG.score += 500 * multiplier;
+    streak += 1;
+  }
+
+  public function childHitLava(child:FlxObject,lava:FlxObject) {
+    child.kill();
+    Registry.kidsKilled += 1;
+    streak = 0;
   }
 
 }

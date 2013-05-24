@@ -125,6 +125,14 @@ class Assets {
 			resourceTypes.set ("assets/indicator.png", "image");
 			resourceClasses.set ("assets/player.png", NME_assets_player_png);
 			resourceTypes.set ("assets/player.png", "image");
+			resourceClasses.set ("assets/scanlines.png", NME_assets_scanlines_png);
+			resourceTypes.set ("assets/scanlines.png", "image");
+			resourceClasses.set ("assets/scanlines2.png", NME_assets_scanlines2_png);
+			resourceTypes.set ("assets/scanlines2.png", "image");
+			resourceClasses.set ("assets/Untitled-7.png", NME_assets_untitled_7_png);
+			resourceTypes.set ("assets/Untitled-7.png", "image");
+			resourceClasses.set ("assets/vignette.png", NME_assets_vignette_png);
+			resourceTypes.set ("assets/vignette.png", "image");
 			
 			
 			initialized = true;

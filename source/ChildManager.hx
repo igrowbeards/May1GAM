@@ -7,7 +7,7 @@ import org.flixel.FlxGroup;
 
 class ChildManager extends FlxGroup {
 
-  private var releaseRate:Float = 10;
+  private var releaseRate:Float = 5;
   private var releaseTimer:Float;
 
   public function new(poolSize:Int = 5) {
@@ -27,13 +27,11 @@ class ChildManager extends FlxGroup {
 
     if (c!=null) {
       c.launch();
-      Registry.kidsDropped += 1;
     }
   }
 
   override public function update():Void {
     super.update();
-    if (Registry.kidsDropped < Registry.totalKids) {
       if (releaseTimer <= 0) {
         release();
         releaseTimer = releaseRate;
@@ -42,6 +40,5 @@ class ChildManager extends FlxGroup {
       else {
         releaseTimer -= FlxG.elapsed;
       }
-    }
   }
 }

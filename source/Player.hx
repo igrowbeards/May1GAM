@@ -66,6 +66,11 @@ class Player extends FlxSprite {
             velocity.x = 0;
         }
 
+        if (y <= 0) {
+            velocity.y = 0;
+            y = 0;
+        }
+
         if (this.isTouching(FlxObject.FLOOR)) {
             singlejump = false;
         }
@@ -88,7 +93,6 @@ class Player extends FlxSprite {
 
         // stun handler
         if (stunned) {
-            play("stunned");
             if (stunTimer <= 0) {
                 stunned = false;
                 stunTimer = stunTime;
@@ -128,6 +132,7 @@ class Player extends FlxSprite {
     public function stun() {
         if (!stunned) {
             stunned = true;
+            FlxG.log("stunned");
         }
     }
 

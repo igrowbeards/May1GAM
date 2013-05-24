@@ -29,19 +29,19 @@ class Platform extends FlxSprite {
     public function launch():Void {
       exists = true;
       //x = 64 + Std.int(Math.random() * (FlxG.width - 128));
-      y = 0;
-      switch(Std.random(6)) {
+      y = -10;
+      switch(Std.random(10)) {
         case 0:
           x = 0;
-        case 1:
+        case 1,  2:
           x = 64;
-        case 2:
+        case 3, 4:
           x = 128;
-        case 3:
+        case 5, 6:
           x = 160;
-        case 4:
+        case 7, 8:
           x = 96;
-        case 5:
+        case 9:
           x = FlxG.width - width;
       }
     }

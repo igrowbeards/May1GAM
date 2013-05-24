@@ -1,6 +1,7 @@
 package;
 
 import org.flixel.FlxG;
+import org.flixel.FlxObject;
 import org.flixel.FlxSprite;
 
 class Enemy2 extends Enemy {
@@ -13,17 +14,17 @@ class Enemy2 extends Enemy {
     }
 
     override public function launch():Void {
-        x = 64 + Std.int(Math.random() * (FlxG.width - 128));
+        //x = Std.int(Math.random() xG.width - 128));
+        x = Std.random(FlxG.width - 20) + 10;
         y = -10;
         velocity.y = 140;
 
-        health = 2;
         exists = true;
+        solid = true;
     }
 
     override public function kill():Void {
         super.kill();
-        FlxG.score += 20;
     }
 
     override public function update():Void {
@@ -31,6 +32,7 @@ class Enemy2 extends Enemy {
 
         if (y > FlxG.height) {
             exists = false;
+            solid = false;
         }
     }
 

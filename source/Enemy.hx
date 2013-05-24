@@ -23,7 +23,6 @@ class Enemy extends FlxSprite {
 
     override public function kill():Void {
         super.kill();
-        FlxG.score += 20;
     }
 
     override public function update():Void {
