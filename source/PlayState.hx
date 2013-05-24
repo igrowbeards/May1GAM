@@ -197,6 +197,7 @@ class PlayState extends FlxState {
     Registry.kidsKilled = 0;
     Registry.kidsSaved = 0;
     Registry.gameSpeed = 1;
+    FlxG.score = 0;
     FlxG.resetState();
   }
 
