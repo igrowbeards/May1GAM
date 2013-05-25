@@ -43,12 +43,16 @@ class Assets {
 			
 			resourceClasses.set ("Beep", NME_assets_data_beep_mp3);
 			resourceTypes.set ("Beep", "sound");
+			resourceClasses.set ("assets/background.png", NME_assets_background_png);
+			resourceTypes.set ("assets/background.png", "image");
 			resourceClasses.set ("assets/candy-32.png", NME_assets_candy_32_png);
 			resourceTypes.set ("assets/candy-32.png", "image");
 			resourceClasses.set ("assets/candy-48.png", NME_assets_candy_48_png);
 			resourceTypes.set ("assets/candy-48.png", "image");
 			resourceClasses.set ("assets/candy-64.png", NME_assets_candy_64_png);
 			resourceTypes.set ("assets/candy-64.png", "image");
+			resourceClasses.set ("assets/danger_candy1.png", NME_assets_danger_candy1_png);
+			resourceTypes.set ("assets/danger_candy1.png", "image");
 			resourceClasses.set ("assets/data/autotiles.png", NME_assets_data_autotiles_png);
 			resourceTypes.set ("assets/data/autotiles.png", "image");
 			resourceClasses.set ("assets/data/autotiles_alt.png", NME_assets_data_autotiles_alt_png);
@@ -119,6 +123,8 @@ class Assets {
 			resourceTypes.set ("assets/data/vcr/stop.png", "image");
 			resourceClasses.set ("assets/data/vis/bounds.png", NME_assets_data_vis_bounds_png);
 			resourceTypes.set ("assets/data/vis/bounds.png", "image");
+			resourceClasses.set ("assets/gumdrop.png", NME_assets_gumdrop_png);
+			resourceTypes.set ("assets/gumdrop.png", "image");
 			resourceClasses.set ("assets/HaxeFlixel.svg", NME_assets_haxeflixel_svg);
 			resourceTypes.set ("assets/HaxeFlixel.svg", "text");
 			resourceClasses.set ("assets/indicator.png", NME_assets_indicator_png);

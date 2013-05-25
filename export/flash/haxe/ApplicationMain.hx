@@ -102,6 +102,11 @@ class ApplicationMain {
             return Assets.getSound ("Beep");
          
 		
+		if (inName=="assets/background.png")
+			 
+            return Assets.getBitmapData ("assets/background.png");
+         
+		
 		if (inName=="assets/candy-32.png")
 			 
             return Assets.getBitmapData ("assets/candy-32.png");
@@ -115,6 +120,11 @@ class ApplicationMain {
 		if (inName=="assets/candy-64.png")
 			 
             return Assets.getBitmapData ("assets/candy-64.png");
+         
+		
+		if (inName=="assets/danger_candy1.png")
+			 
+            return Assets.getBitmapData ("assets/danger_candy1.png");
          
 		
 		if (inName=="assets/data/autotiles.png")
@@ -292,6 +302,11 @@ class ApplicationMain {
             return Assets.getBitmapData ("assets/data/vis/bounds.png");
          
 		
+		if (inName=="assets/gumdrop.png")
+			 
+            return Assets.getBitmapData ("assets/gumdrop.png");
+         
+		
 		if (inName=="assets/HaxeFlixel.svg")
 			 
 			 return Assets.getText ("assets/HaxeFlixel.svg");
@@ -347,9 +362,11 @@ class ApplicationMain {
 }
 
 class NME_assets_data_beep_mp3 extends nme.media.Sound { }
+class NME_assets_background_png extends nme.display.BitmapData { public function new () { super (0, 0); } }
 class NME_assets_candy_32_png extends nme.display.BitmapData { public function new () { super (0, 0); } }
 class NME_assets_candy_48_png extends nme.display.BitmapData { public function new () { super (0, 0); } }
 class NME_assets_candy_64_png extends nme.display.BitmapData { public function new () { super (0, 0); } }
+class NME_assets_danger_candy1_png extends nme.display.BitmapData { public function new () { super (0, 0); } }
 class NME_assets_data_autotiles_png extends nme.display.BitmapData { public function new () { super (0, 0); } }
 class NME_assets_data_autotiles_alt_png extends nme.display.BitmapData { public function new () { super (0, 0); } }
 class NME_assets_data_base_png extends nme.display.BitmapData { public function new () { super (0, 0); } }
@@ -385,6 +402,7 @@ class NME_assets_data_vcr_restart_png extends nme.display.BitmapData { public fu
 class NME_assets_data_vcr_step_png extends nme.display.BitmapData { public function new () { super (0, 0); } }
 class NME_assets_data_vcr_stop_png extends nme.display.BitmapData { public function new () { super (0, 0); } }
 class NME_assets_data_vis_bounds_png extends nme.display.BitmapData { public function new () { super (0, 0); } }
+class NME_assets_gumdrop_png extends nme.display.BitmapData { public function new () { super (0, 0); } }
 class NME_assets_haxeflixel_svg extends nme.utils.ByteArray { }
 class NME_assets_indicator_png extends nme.display.BitmapData { public function new () { super (0, 0); } }
 class NME_assets_player_png extends nme.display.BitmapData { public function new () { super (0, 0); } }

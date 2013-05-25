@@ -28,6 +28,7 @@ class PlayState extends FlxState {
   public var children:ChildManager;
   public var scanlines:FlxBackdrop;
   public var vignette:FlxBackdrop;
+  public var bg:BG;
 
   //create all the game state objects, overriding create is the best place
   override public function create():Void {
@@ -36,6 +37,9 @@ class PlayState extends FlxState {
     Registry.init();
 
     speedUpTimer = speedUpTime;
+
+    bg = new BG();
+    add(bg);
 
     //add your objects to the game stage to be drawn
     add(Registry.bullets);
@@ -95,7 +99,7 @@ class PlayState extends FlxState {
     optionsIndicator.exists = false;
 
     scanlines = new FlxBackdrop("assets/scanlines2.png", 0, 0, true, true);
-    add(scanlines);
+    //add(scanlines);
 
     vignette = new FlxBackdrop("assets/vignette.png", 0, 0, false, false);
     add(vignette);
@@ -126,7 +130,6 @@ class PlayState extends FlxState {
         else {
           speedUpTimer = speedUpTime;
           Registry.gameSpeed += .1;
-          FlxG.log(Registry.gameSpeed);
         }
       }
 
@@ -178,7 +181,8 @@ class PlayState extends FlxState {
   }
 
   public function levelOver(l:FlxObject,p:FlxObject) {
-    gameOver = true;
+    var pref = cast(p, Player);
+    pref.stun();
     screenDimmer.exists = true;
     gameOverText.text = "GAME OVER";
     gameOverStats.text = "Score: " + FlxG.score + "\n\nYou rescued " + Std.string(Registry.kidsSaved) + " children. \n\nYou let " + Std.string(Registry.kidsKilled) + " children to plummet to their deaths";
@@ -187,6 +191,7 @@ class PlayState extends FlxState {
     optionsText.exists = true;
     gameOverStats.exists = true;
     optionsIndicator.exists = true;
+    gameOver = true;
   }
 
   public function fadeOutToPlayState() {
@@ -209,6 +214,7 @@ class PlayState extends FlxState {
     e.kill();
     var playerRef = cast(p, Player);
     playerRef.stun();
+    FlxG.log("hit enemy");
   }
 
   public function playerHitChild(p:FlxObject,c:FlxObject) {

@@ -34,13 +34,41 @@ class Platform extends FlxSprite {
         case 0:
           x = 0;
         case 1,  2:
-          x = 64;
+          switch(Std.random(3)) {
+            case 0:
+              x = 64 + Std.random(33);
+            case 1:
+              x = 64 - Std.random(33);
+            case 2:
+              x = 64;
+          }
         case 3, 4:
-          x = 128;
+          switch(Std.random(3)) {
+            case 0:
+              x = 128 + Std.random(33);
+            case 1:
+              x = 128 - Std.random(33);
+            case 2:
+              x = 128;
+          }
         case 5, 6:
-          x = 160;
+          switch(Std.random(3)) {
+            case 0:
+              x = 160 + Std.random(33);
+            case 1:
+              x = 160 - Std.random(33);
+            case 2:
+              x = 160;
+          }
         case 7, 8:
-          x = 96;
+          switch(Std.random(3)) {
+            case 0:
+              x = 96 + Std.random(33);
+            case 1:
+              x = 96 - Std.random(33);
+            case 2:
+              x = 96;
+          }
         case 9:
           x = FlxG.width - width;
       }

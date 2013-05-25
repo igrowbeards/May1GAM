@@ -101,7 +101,6 @@ class Player extends FlxSprite {
                 stunTimer -= FlxG.elapsed;
             }
         }
-
     }
 
     public function moveLeft():Bool {
@@ -132,7 +131,6 @@ class Player extends FlxSprite {
     public function stun() {
         if (!stunned) {
             stunned = true;
-            FlxG.log("stunned");
         }
     }
 
